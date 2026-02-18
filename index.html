@@ -44,6 +44,17 @@ audio {
     height: 32px;        /* etwas höhere Player-Höhe für Slider */
 }
 
+/* Liedtext */
+.lyrics-row { display: none; }
+.lyrics-row.active { display: table-row; }
+.lyrics-row td {
+    text-align: left;
+    font-style: italic;
+    color: #555;
+    line-height: 1.7;
+    border-top: none;
+}
+
 /* Mobile Optimierung */
 @media (max-width: 768px) {
     table, thead, tbody, th, td, tr {
@@ -79,6 +90,31 @@ audio {
     td:nth-child(4)::before { content: "T"; }
     td:nth-child(5)::before { content: "B"; }
 
+    .lyrics-row.active {
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    tr.lyrics-row > td {
+        display: block;
+        width: auto;
+        border-left: 3px solid var(--lyrics-border);
+        background: var(--lyrics-bg);
+        color: #4a3828;
+        text-transform: none;
+        font-family: Georgia, "Times New Roman", serif;
+        font-style: italic;
+        font-size: 0.95rem;
+        font-weight: normal;
+        letter-spacing: normal;
+        line-height: 1.9;
+        padding: 16px 20px;
+    }
+
+    tr.lyrics-row > td::before {
+        content: none !important;
+    }
+
     audio {
         width: 100%;     /* auf Mobilgerät volle Breite */
         height: 36px;    /* etwas größer für Touchbedienung */
@@ -103,7 +139,7 @@ audio {
 <tbody>
 
 <!-- 7 -->
-<tr>
+<tr data-nr="7">
 <td>7</td>
 <td><audio controls preload="none" src="audio/nr7-S.m4a"></audio></td>
 <td><audio controls preload="none" src="audio/nr7-A.m4a"></audio></td>
@@ -112,7 +148,7 @@ audio {
 </tr>
 
 <!-- 9 -->
-<tr>
+<tr data-nr="9">
 <td>9</td>
 <td><audio controls preload="none" src="audio/nr9-S.m4a"></audio></td>
 <td><audio controls preload="none" src="audio/nr9-A.m4a"></audio></td>
@@ -121,7 +157,7 @@ audio {
 </tr>
 
 <!-- 15 -->
-<tr>
+<tr data-nr="15">
 <td>15</td>
 <td><audio controls preload="none" src="audio/nr15-S.m4a"></audio></td>
 <td><audio controls preload="none" src="audio/nr15-A.m4a"></audio></td>
@@ -130,7 +166,7 @@ audio {
 </tr>
 
 <!-- 20 -->
-<tr>
+<tr data-nr="20">
 <td>20</td>
 <td><audio controls preload="none" src="audio/nr20-S.m4a"></audio></td>
 <td><audio controls preload="none" src="audio/nr20-A.m4a"></audio></td>
@@ -139,7 +175,7 @@ audio {
 </tr>
 
 <!-- 21 -->
-<tr>
+<tr data-nr="21">
 <td>21</td>
 <td><audio controls preload="none" src="audio/nr21-S.m4a"></audio></td>
 <td><audio controls preload="none" src="audio/nr21-A.m4a"></audio></td>
@@ -148,7 +184,7 @@ audio {
 </tr>
 
 <!-- 27 -->
-<tr>
+<tr data-nr="27">
 <td>27</td>
 <td><audio controls preload="none" src="audio/nr27-S.m4a"></audio></td>
 <td><audio controls preload="none" src="audio/nr27-A.m4a"></audio></td>
@@ -157,7 +193,7 @@ audio {
 </tr>
 
 <!-- 40 -->
-<tr>
+<tr data-nr="40">
 <td>40</td>
 <td><audio controls preload="none" src="audio/nr40-S.m4a"></audio></td>
 <td><audio controls preload="none" src="audio/nr40-A.m4a"></audio></td>
@@ -166,7 +202,7 @@ audio {
 </tr>
 
 <!-- 52 -->
-<tr>
+<tr data-nr="52">
 <td>52</td>
 <td><audio controls preload="none" src="audio/nr52-S.m4a"></audio></td>
 <td><audio controls preload="none" src="audio/nr52-A.m4a"></audio></td>
@@ -175,7 +211,7 @@ audio {
 </tr>
 
 <!-- 56 -->
-<tr>
+<tr data-nr="56">
 <td>56</td>
 <td><audio controls preload="none" src="audio/nr56-S.m4a"></audio></td>
 <td><audio controls preload="none" src="audio/nr56-A.m4a"></audio></td>
@@ -184,7 +220,7 @@ audio {
 </tr>
 
 <!-- 65 -->
-<tr>
+<tr data-nr="65">
 <td>65</td>
 <td><audio controls preload="none" src="audio/nr65-S.m4a"></audio></td>
 <td><audio controls preload="none" src="audio/nr65-A.m4a"></audio></td>
@@ -193,7 +229,7 @@ audio {
 </tr>
 
 <!-- 68 -->
-<tr>
+<tr data-nr="68">
 <td>68</td>
 <td><audio controls preload="none" src="audio/nr68-S.m4a"></audio></td>
 <td><audio controls preload="none" src="audio/nr68-A.m4a"></audio></td>
@@ -204,15 +240,34 @@ audio {
 </tbody>
 </table>
 
+<script src="lyrics.js"></script>
 <script>
+// Inject lyrics rows from lyrics.js into the table
+document.querySelectorAll("tr[data-nr]").forEach(row => {
+    const nr = Number(row.dataset.nr);
+    if (!LYRICS[nr]) return;
+    const lyricsRow = document.createElement("tr");
+    lyricsRow.className = "lyrics-row";
+    lyricsRow.dataset.for = String(nr);
+    const td = document.createElement("td");
+    td.colSpan = 5;
+    td.innerHTML = LYRICS[nr].replaceAll("\n", "<br>");
+    lyricsRow.appendChild(td);
+    row.after(lyricsRow);
+});
+
 const players = document.querySelectorAll("audio");
 
 players.forEach(player => {
     player.addEventListener("play", () => {
         players.forEach(other => {
-            if (other !== player) {
-                other.pause();
-            }
+            if (other !== player) other.pause();
+        });
+        // Show lyrics for the active row, hide all others
+        const activeRow = player.closest("tr[data-nr]");
+        const activeNr = activeRow && activeRow.dataset.nr;
+        document.querySelectorAll(".lyrics-row").forEach(row => {
+            row.classList.toggle("active", row.dataset.for === activeNr);
         });
     });
 });
@@ -220,5 +275,3 @@ players.forEach(player => {
 
 </body>
 </html>
-
-
