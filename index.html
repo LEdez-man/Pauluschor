@@ -26,6 +26,18 @@
 
 * { box-sizing: border-box; }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
 body {
     font-family: system-ui, -apple-system, sans-serif;
     margin: 0;
@@ -70,7 +82,7 @@ footer {
 footer p { margin: 0 0 0.5em; }
 footer p:last-child { margin-bottom: 0; }
 
-.table-wrap {
+main {
     max-width: 860px;
     margin: 0 auto;
     border-radius: 8px;
@@ -224,15 +236,16 @@ audio {
 <p>Johann Sebastian Bach · Uraufführung 7. April 1724</p>
 </header>
 
-<div class="table-wrap">
+<main class="table-wrap">
 <table>
+<caption class="sr-only">Choräle aus der Johannespassion BWV 245 nach Stimmen (Sopran, Alt, Tenor, Bass)</caption>
 <thead>
 <tr>
-<th>Nr.</th>
-<th>S</th>
-<th>A</th>
-<th>T</th>
-<th>B</th>
+<th scope="col">Nr.</th>
+<th scope="col">S</th>
+<th scope="col">A</th>
+<th scope="col">T</th>
+<th scope="col">B</th>
 </tr>
 </thead>
 <tbody>
@@ -240,105 +253,105 @@ audio {
 <!-- 7 -->
 <tr data-nr="7">
 <td>7</td>
-<td><audio controls preload="none" src="audio/nr7-S.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr7-A.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr7-T.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr7-B.m4a"></audio></td>
+<td><audio controls preload="none" src="audio/nr7-S.m4a" aria-label="Nr. 7 – Sopran"></audio></td>
+<td><audio controls preload="none" src="audio/nr7-A.m4a" aria-label="Nr. 7 – Alt"></audio></td>
+<td><audio controls preload="none" src="audio/nr7-T.m4a" aria-label="Nr. 7 – Tenor"></audio></td>
+<td><audio controls preload="none" src="audio/nr7-B.m4a" aria-label="Nr. 7 – Bass"></audio></td>
 </tr>
 
 <!-- 9 -->
 <tr data-nr="9">
 <td>9</td>
-<td><audio controls preload="none" src="audio/nr9-S.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr9-A.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr9-T.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr9-B.m4a"></audio></td>
+<td><audio controls preload="none" src="audio/nr9-S.m4a" aria-label="Nr. 9 – Sopran"></audio></td>
+<td><audio controls preload="none" src="audio/nr9-A.m4a" aria-label="Nr. 9 – Alt"></audio></td>
+<td><audio controls preload="none" src="audio/nr9-T.m4a" aria-label="Nr. 9 – Tenor"></audio></td>
+<td><audio controls preload="none" src="audio/nr9-B.m4a" aria-label="Nr. 9 – Bass"></audio></td>
 </tr>
 
 <!-- 15 -->
 <tr data-nr="15">
 <td>15</td>
-<td><audio controls preload="none" src="audio/nr15-S.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr15-A.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr15-T.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr15-B.m4a"></audio></td>
+<td><audio controls preload="none" src="audio/nr15-S.m4a" aria-label="Nr. 15 – Sopran"></audio></td>
+<td><audio controls preload="none" src="audio/nr15-A.m4a" aria-label="Nr. 15 – Alt"></audio></td>
+<td><audio controls preload="none" src="audio/nr15-T.m4a" aria-label="Nr. 15 – Tenor"></audio></td>
+<td><audio controls preload="none" src="audio/nr15-B.m4a" aria-label="Nr. 15 – Bass"></audio></td>
 </tr>
 
 <!-- 20 -->
 <tr data-nr="20">
 <td>20</td>
-<td><audio controls preload="none" src="audio/nr20-S.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr20-A.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr20-T.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr20-B.m4a"></audio></td>
+<td><audio controls preload="none" src="audio/nr20-S.m4a" aria-label="Nr. 20 – Sopran"></audio></td>
+<td><audio controls preload="none" src="audio/nr20-A.m4a" aria-label="Nr. 20 – Alt"></audio></td>
+<td><audio controls preload="none" src="audio/nr20-T.m4a" aria-label="Nr. 20 – Tenor"></audio></td>
+<td><audio controls preload="none" src="audio/nr20-B.m4a" aria-label="Nr. 20 – Bass"></audio></td>
 </tr>
 
 <!-- 21 -->
 <tr data-nr="21">
 <td>21</td>
-<td><audio controls preload="none" src="audio/nr21-S.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr21-A.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr21-T.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr21-B.m4a"></audio></td>
+<td><audio controls preload="none" src="audio/nr21-S.m4a" aria-label="Nr. 21 – Sopran"></audio></td>
+<td><audio controls preload="none" src="audio/nr21-A.m4a" aria-label="Nr. 21 – Alt"></audio></td>
+<td><audio controls preload="none" src="audio/nr21-T.m4a" aria-label="Nr. 21 – Tenor"></audio></td>
+<td><audio controls preload="none" src="audio/nr21-B.m4a" aria-label="Nr. 21 – Bass"></audio></td>
 </tr>
 
 <!-- 27 -->
 <tr data-nr="27">
 <td>27</td>
-<td><audio controls preload="none" src="audio/nr27-S.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr27-A.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr27-T.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr27-B.m4a"></audio></td>
+<td><audio controls preload="none" src="audio/nr27-S.m4a" aria-label="Nr. 27 – Sopran"></audio></td>
+<td><audio controls preload="none" src="audio/nr27-A.m4a" aria-label="Nr. 27 – Alt"></audio></td>
+<td><audio controls preload="none" src="audio/nr27-T.m4a" aria-label="Nr. 27 – Tenor"></audio></td>
+<td><audio controls preload="none" src="audio/nr27-B.m4a" aria-label="Nr. 27 – Bass"></audio></td>
 </tr>
 
 <!-- 40 -->
 <tr data-nr="40">
 <td>40</td>
-<td><audio controls preload="none" src="audio/nr40-S.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr40-A.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr40-T.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr40-B.m4a"></audio></td>
+<td><audio controls preload="none" src="audio/nr40-S.m4a" aria-label="Nr. 40 – Sopran"></audio></td>
+<td><audio controls preload="none" src="audio/nr40-A.m4a" aria-label="Nr. 40 – Alt"></audio></td>
+<td><audio controls preload="none" src="audio/nr40-T.m4a" aria-label="Nr. 40 – Tenor"></audio></td>
+<td><audio controls preload="none" src="audio/nr40-B.m4a" aria-label="Nr. 40 – Bass"></audio></td>
 </tr>
 
 <!-- 52 -->
 <tr data-nr="52">
 <td>52</td>
-<td><audio controls preload="none" src="audio/nr52-S.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr52-A.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr52-T.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr52-B.m4a"></audio></td>
+<td><audio controls preload="none" src="audio/nr52-S.m4a" aria-label="Nr. 52 – Sopran"></audio></td>
+<td><audio controls preload="none" src="audio/nr52-A.m4a" aria-label="Nr. 52 – Alt"></audio></td>
+<td><audio controls preload="none" src="audio/nr52-T.m4a" aria-label="Nr. 52 – Tenor"></audio></td>
+<td><audio controls preload="none" src="audio/nr52-B.m4a" aria-label="Nr. 52 – Bass"></audio></td>
 </tr>
 
 <!-- 56 -->
 <tr data-nr="56">
 <td>56</td>
-<td><audio controls preload="none" src="audio/nr56-S.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr56-A.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr56-T.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr56-B.m4a"></audio></td>
+<td><audio controls preload="none" src="audio/nr56-S.m4a" aria-label="Nr. 56 – Sopran"></audio></td>
+<td><audio controls preload="none" src="audio/nr56-A.m4a" aria-label="Nr. 56 – Alt"></audio></td>
+<td><audio controls preload="none" src="audio/nr56-T.m4a" aria-label="Nr. 56 – Tenor"></audio></td>
+<td><audio controls preload="none" src="audio/nr56-B.m4a" aria-label="Nr. 56 – Bass"></audio></td>
 </tr>
 
 <!-- 65 -->
 <tr data-nr="65">
 <td>65</td>
-<td><audio controls preload="none" src="audio/nr65-S.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr65-A.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr65-T.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr65-B.m4a"></audio></td>
+<td><audio controls preload="none" src="audio/nr65-S.m4a" aria-label="Nr. 65 – Sopran"></audio></td>
+<td><audio controls preload="none" src="audio/nr65-A.m4a" aria-label="Nr. 65 – Alt"></audio></td>
+<td><audio controls preload="none" src="audio/nr65-T.m4a" aria-label="Nr. 65 – Tenor"></audio></td>
+<td><audio controls preload="none" src="audio/nr65-B.m4a" aria-label="Nr. 65 – Bass"></audio></td>
 </tr>
 
 <!-- 68 -->
 <tr data-nr="68">
 <td>68</td>
-<td><audio controls preload="none" src="audio/nr68-S.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr68-A.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr68-T.m4a"></audio></td>
-<td><audio controls preload="none" src="audio/nr68-B.m4a"></audio></td>
+<td><audio controls preload="none" src="audio/nr68-S.m4a" aria-label="Nr. 68 – Sopran"></audio></td>
+<td><audio controls preload="none" src="audio/nr68-A.m4a" aria-label="Nr. 68 – Alt"></audio></td>
+<td><audio controls preload="none" src="audio/nr68-T.m4a" aria-label="Nr. 68 – Tenor"></audio></td>
+<td><audio controls preload="none" src="audio/nr68-B.m4a" aria-label="Nr. 68 – Bass"></audio></td>
 </tr>
 
 </tbody>
 </table>
-</div>
+</main>
 
 <footer>
     <p>Die Johannespassion BWV 245 wurde am <strong>7. April 1724</strong> in der Thomaskirche Leipzig uraufgeführt — Bachs erstes großes Passionswerk als Thomaskantor.</p>
