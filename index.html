@@ -18,14 +18,18 @@
 <p>Johann Sebastian Bach · Uraufführung <time datetime="1724-04-07" aria-label="7. April 1724">7. April 1724</time></p>
 </header>
 
+<p class="focus-link-bar" id="focus-link-bar" hidden>
+  <a href="#" id="focus-link"></a>
+</p>
+
 <p class="tip-text">💡 Tipp: Auf die Choralnummer klicken, um das Notenblatt (PDF) zu öffnen.</p>
 
 <div class="voice-pref" role="group" aria-label="Bevorzugte Stimme auswählen">
     <span>Meine Stimme:</span>
-    <button class="voice-btn" data-voice="S" aria-pressed="false" aria-label="Sopran">S</button>
-    <button class="voice-btn" data-voice="A" aria-pressed="false" aria-label="Alt">A</button>
-    <button class="voice-btn" data-voice="T" aria-pressed="false" aria-label="Tenor">T</button>
-    <button class="voice-btn" data-voice="B" aria-pressed="false" aria-label="Bass">B</button>
+    <button class="voice-btn" data-voice="S" aria-pressed="false">Sopran</button>
+    <button class="voice-btn" data-voice="A" aria-pressed="false">Alt</button>
+    <button class="voice-btn" data-voice="T" aria-pressed="false">Tenor</button>
+    <button class="voice-btn" data-voice="B" aria-pressed="false">Bass</button>
     <label class="voice-autoplay-label">
         <input type="checkbox" id="voice-autoplay">
         Autoplay
@@ -211,6 +215,10 @@ const autoplayCheckbox = document.getElementById("voice-autoplay");
 // Default is enabled; only store when explicitly unchecked
 autoplayCheckbox.checked = localStorage.getItem("voiceAutoplay") !== "false";
 
+const focusVoice = new URLSearchParams(location.search).get("fokus");
+const focusBar = document.getElementById("focus-link-bar");
+const focusLink = document.getElementById("focus-link");
+
 function updateVoiceUI() {
     voiceButtons.forEach(btn => {
         const active = btn.dataset.voice === preferredVoice;
@@ -221,6 +229,7 @@ function updateVoiceUI() {
     voicePrefHint.textContent = preferredVoice && autoplayOn
         ? "→ Beim Öffnen des Notenblatts startet " + VOICE_LABEL[preferredVoice] + " nach 3\u00a0Sekunden"
         : "";
+    updateFocusLink();
 }
 
 autoplayCheckbox.addEventListener("change", () => {
@@ -235,10 +244,42 @@ voiceButtons.forEach(btn => {
         localStorage.setItem("preferredVoice", preferredVoice);
         cancelAutoPlay();
         updateVoiceUI();
+        if (focusVoice) {
+            if (preferredVoice) {
+                history.replaceState(null, "", `?fokus=${preferredVoice}`);
+                document.querySelector("table").dataset.voice = preferredVoice;
+                document.querySelector("thead th:nth-child(2)").textContent = VOICE_LABEL[preferredVoice];
+            } else {
+                history.replaceState(null, "", "index.html");
+                delete document.querySelector("table").dataset.voice;
+            }
+        }
     });
 });
 
 updateVoiceUI();
+
+// --- Fokus-Modus ---
+function updateFocusLink() {
+    if (focusVoice) return;
+    if (preferredVoice) {
+        focusBar.removeAttribute("hidden");
+        focusLink.href = `?fokus=${preferredVoice}`;
+        focusLink.textContent = `Nur ${VOICE_LABEL[preferredVoice]} →`;
+    } else {
+        focusBar.setAttribute("hidden", "");
+    }
+}
+
+if (focusVoice && VOICE_IDX.hasOwnProperty(focusVoice)) {
+    document.querySelector("table").dataset.voice = focusVoice;
+    document.querySelector("thead th:nth-child(2)").textContent = VOICE_LABEL[focusVoice];
+    focusBar.removeAttribute("hidden");
+    focusLink.href = "index.html";
+    focusLink.textContent = "← Alle Stimmen anzeigen";
+    preferredVoice = focusVoice;
+    updateVoiceUI();
+}
 
 // Auto-play beim Öffnen des Notenblatts
 let autoPlayTimer = null;

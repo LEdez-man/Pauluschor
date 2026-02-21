@@ -251,11 +251,49 @@ audio {
     font-style: italic;
 }
 
+/* Fokus-Link-Bar */
+.focus-link-bar {
+    max-width: 860px;
+    margin: -16px auto 10px;
+    font-size: 0.85rem;
+    text-align: right;
+    color: #7a6a58;
+}
+
+/* Fokus-Modus: alle 4 Audio-Spalten verstecken */
+table[data-voice] td:nth-child(2),
+table[data-voice] td:nth-child(3),
+table[data-voice] td:nth-child(4),
+table[data-voice] td:nth-child(5),
+table[data-voice] th:nth-child(2),
+table[data-voice] th:nth-child(3),
+table[data-voice] th:nth-child(4),
+table[data-voice] th:nth-child(5) { display: none; }
+
+/* Nur die gewählte Spalte einblenden */
+table[data-voice="S"] td:nth-child(2),
+table[data-voice="S"] th:nth-child(2) { display: table-cell; }
+table[data-voice="A"] td:nth-child(3),
+table[data-voice="A"] th:nth-child(3) { display: table-cell; }
+table[data-voice="T"] td:nth-child(4),
+table[data-voice="T"] th:nth-child(4) { display: table-cell; }
+table[data-voice="B"] td:nth-child(5),
+table[data-voice="B"] th:nth-child(5) { display: table-cell; }
+
 /* Mobile Optimierung */
 @media (max-width: 768px) {
     table, thead, tbody, th, td, tr {
         display: block;
     }
+
+    /* Fokus-Modus: sichtbare Spalte wieder als flex darstellen */
+    table[data-voice="S"] td:nth-child(2),
+    table[data-voice="A"] td:nth-child(3),
+    table[data-voice="T"] td:nth-child(4),
+    table[data-voice="B"] td:nth-child(5) { display: flex; }
+
+    /* Fokus-Modus: Stimmen-Label ausblenden (nur eine Stimme sichtbar) */
+    table[data-voice] td:not(:first-child)::before { content: none; }
 
     thead { display: none; }
 

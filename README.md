@@ -12,8 +12,21 @@
 
 Wenn du die Noten ausgedruckt oder digital vorliegen hast:
 
-1. Klick direkt auf die gewünschte Stimme (**S**, **A**, **T** oder **B**) unter der entsprechenden Choralnummer
+1. Klick direkt auf die gewünschte Stimme (**Sopran**, **Alt**, **Tenor** oder **Bass**) unter der entsprechenden Choralnummer
 2. Die Audiodatei deiner Stimme wird abgespielt
+
+### Fokus-Ansicht (nur eine Stimme)
+
+Wer beim Üben nur die eigene Stimme sehen möchte:
+
+1. **Stimme vorauswählen** (siehe oben)
+2. Auf den Link **„Nur [Stimme] →"** klicken, der oberhalb der Tabelle erscheint
+3. Die URL wechselt zu `?fokus=S` (bzw. `A`, `T`, `B`) – nur die gewählte Spalte bleibt sichtbar
+4. Stimme kann jederzeit über die Buttons gewechselt werden; **„← Alle Stimmen anzeigen"** kehrt zur normalen Ansicht zurück
+
+Der Link lässt sich auch direkt teilen oder als Lesezeichen speichern.
+
+---
 
 ### Ohne Noten (Partitur-Ansicht)
 
